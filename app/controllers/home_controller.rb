@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @latitude = request.location.city
-    @longitude = request.location.country_code
+    @latitude = request.location.latitude
+    @longitude = request.location.longitude
   end
 end
