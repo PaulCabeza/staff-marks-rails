@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Mark type:</strong>
+  <%= @mark.mark_type %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @mark.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @mark.longitude %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @mark.address %>
+</p>
+
+<%= link_to 'Edit', edit_mark_path(@mark) %> |
+<%= link_to 'Back', marks_path %>
