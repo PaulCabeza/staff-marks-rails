@@ -5,3 +5,9 @@
   width: 100%;
   /* The width is the width of the web page */
 }
+
+.btn-block {
+  height: 50px;
+  /* define values in pixels / Percentage or em. whatever suits
+     your requirements */
+}

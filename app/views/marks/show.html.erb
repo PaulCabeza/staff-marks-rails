@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Mark type:</strong>
   <%= @mark.mark_type %>
@@ -18,6 +16,11 @@
 <p>
   <strong>Address:</strong>
   <%= @mark.address %>
+</p>
+
+<p>
+  <strong>Datetime:</strong>
+  <%= @mark.created_at.to_s(:short) %>
 </p>
 
 <%= link_to 'Edit', edit_mark_path(@mark) %> |

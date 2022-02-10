@@ -1,14 +1,15 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Marks</h1>
+<h1>My Marks</h1>
 
-<table>
-  <thead>
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead class="thead-dark">
     <tr>
-      <th>Mark type</th>
+      <th scope="col">Mark type</th>
       <th>Latitude</th>
       <th>Longitude</th>
       <th>Address</th>
+      <th>Datetime</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
         <td><%= mark.latitude %></td>
         <td><%= mark.longitude %></td>
         <td><%= mark.address %></td>
+        <td><%= mark.created_at.to_s(:short) %></td>
         <td><%= link_to 'Show', mark %></td>
         <td><%= link_to 'Edit', edit_mark_path(mark) %></td>
         <td><%= link_to 'Destroy', mark, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -27,6 +29,7 @@
     <% end %>
   </tbody>
 </table>
+</div>
 
 <br>
 

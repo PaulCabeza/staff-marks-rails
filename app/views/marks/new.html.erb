@@ -1,10 +1,8 @@
 <%= content_for :head do %>
     <script type="text/javascript">
 
-
      function success(position)
      {
-
          document.getElementById('longitude').value = position.coords.longitude;
          document.getElementById('latitude').value = position.coords.latitude;
           const uluru =
@@ -38,8 +36,6 @@
           // Call getCurrentPosition with success and failure callbacks
           navigator.geolocation.getCurrentPosition( success, fail );
           // The location of Uluru
-          // const uluru = { lat: -25.344, lng: 131.036 };
-
 
         }
         else
@@ -47,9 +43,7 @@
            alert("Sorry, your browser does not support geolocation services.");
         }
 
-
       }
-
 
     </script>
 <% end %>
@@ -81,10 +75,9 @@
     </div>
   <% end %>
 
-  <%# <div class="field">
-    <%= form.label :mark_type %>
-    <%# <%= form.text_field :mark_type %>
-  <%# </div> %>
+  <div class="field">
+    <%= form.text_field :mark_type, id: :mark_type, hidden: true %>
+  </div>
 
   <div class="field">
     <%= form.text_field :latitude, id:'latitude', hidden: true %>
@@ -98,29 +91,24 @@
     <%= form.label :address %>
     <%# <%= form.text_field :address %>
   <%# </div> %>
-  <div class="row m-1">
-    <div class="actions m-2 btn-group btn-block">
-      <%= form.submit "Mark Entry", class:'btn btn-primary m-1' %>
-      <%= form.submit "Mark Exit", class:'btn btn-info m-1' %>
-    </div>
-  </div>
 
   <div class="row m-1">
-    <div class="actions m-2 btn-group btn-block">
-      <%= form.submit "Mark Entry", class:'btn btn-warning m-1' %>
-      <%= form.submit "Mark Exit", class:'btn btn-secondary m-1' %>
+    <div class="actions m-1 btn-group btn-block">
+      <%= form.button "Mark Entry", class:'btn btn-primary m-1', data: { confirm: "Are you sure?" }, onClick:"markEntry();" %>
+      <%= form.button "Mark Exit", class:'btn btn-success m-1', data: { confirm: "Are you sure?" }, onClick:"markExit();" %>
     </div>
   </div>
-
-  <div class="row m-1">
-    <div class="actions m-2 btn-group btn-block">
-      <%= form.submit "Mark Entry", class:'btn btn-danger m-1' %>
-      <%= form.submit "Mark Exit", class:'btn btn-secondary m-1' %>
-    </div>
-  </div>
-
 
 <% end %>
 
-
 <%= link_to 'See my marks', marks_path %>
+
+<script>
+  function markEntry(params) {
+    document.getElementById('mark_type').value = "entry"
+  }
+  function markExit(params) {
+    document.getElementById('mark_type').value = "exit"
+  }
+
+</script>

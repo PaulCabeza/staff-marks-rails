@@ -52,7 +52,7 @@ class MarksController < ApplicationController
     @mark.destroy
 
     respond_to do |format|
-      format.html { redirect_to marks_url, notice: "Mark was successfully destroyed." }
+      format.html { redirect_to marks_url, alert: "Mark was successfully destroyed." }
       format.json { head :no_content }
     end
   end
