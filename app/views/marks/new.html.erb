@@ -7,7 +7,6 @@
 
          document.getElementById('longitude').value = position.coords.longitude;
          document.getElementById('latitude').value = position.coords.latitude;
-         alert(document.getElementById('latitude').value);
           const uluru =
           {
             //lat: -25.344, lng: 131.036
@@ -54,7 +53,7 @@
 
     </script>
 <% end %>
-
+<br>
 <h1>New Mark</h1>
 
 <div id="map"></div>
@@ -82,30 +81,46 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <%# <div class="field">
     <%= form.label :mark_type %>
-    <%= form.text_field :mark_type %>
+    <%# <%= form.text_field :mark_type %>
+  <%# </div> %>
+
+  <div class="field">
+    <%= form.text_field :latitude, id:'latitude', hidden: true %>
   </div>
 
   <div class="field">
-    <%= form.label :latitude %>
-    <%= form.text_field :latitude, id:'latitude' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :longitude %>
-    <%= form.text_field :longitude, id:'longitude' %>
+    <%= form.text_field :longitude, id:'longitude', hidden: true %>
   </div>
 
   <%# <div class="field">
     <%= form.label :address %>
     <%# <%= form.text_field :address %>
   <%# </div> %>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="row m-1">
+    <div class="actions m-2 btn-group btn-block">
+      <%= form.submit "Mark Entry", class:'btn btn-primary m-1' %>
+      <%= form.submit "Mark Exit", class:'btn btn-info m-1' %>
+    </div>
   </div>
+
+  <div class="row m-1">
+    <div class="actions m-2 btn-group btn-block">
+      <%= form.submit "Mark Entry", class:'btn btn-warning m-1' %>
+      <%= form.submit "Mark Exit", class:'btn btn-secondary m-1' %>
+    </div>
+  </div>
+
+  <div class="row m-1">
+    <div class="actions m-2 btn-group btn-block">
+      <%= form.submit "Mark Entry", class:'btn btn-danger m-1' %>
+      <%= form.submit "Mark Exit", class:'btn btn-secondary m-1' %>
+    </div>
+  </div>
+
+
 <% end %>
 
 
-<%= link_to 'Back', marks_path %>
+<%= link_to 'See my marks', marks_path %>
