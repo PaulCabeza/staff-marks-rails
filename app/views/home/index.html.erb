@@ -38,5 +38,6 @@
   <INPUT TYPE="text" NAME="lat" ID="lat" VALUE="">
 </form>
 <p><a href="https://maps.google.com/?ll=document.getElementById('lat').value,document.getElementById('long').value">Link to the map</a> </p>
+<p><a href="https://maps.google.com/?ll=<%= @latitude %>,<%= @longitude %>">Link to the map using geocoder</a> </p>
 
 
