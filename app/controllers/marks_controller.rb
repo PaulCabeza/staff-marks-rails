@@ -21,7 +21,13 @@ class MarksController < ApplicationController
 
   # POST /marks or /marks.json
   def create
+    @latitude = mark_params[:latitude]    
+
     @mark = Mark.new(mark_params)
+    geo_localization = "#{@mark.latitude},#{@mark.longitude}"    
+    query = Geocoder.search(geo_localization).first
+    @mark.address = query.address
+
 
     respond_to do |format|
       if @mark.save
