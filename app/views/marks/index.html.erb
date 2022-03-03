@@ -23,7 +23,7 @@
         <td><%= mark.address %></td>
         <td><%= mark.created_at.to_s(:short) %></td>
         <td><%= link_to 'Show', mark %></td>
-        <td><%= link_to 'Edit', edit_mark_path(mark) %></td>
+        <td><%= link_to 'Map', "http://maps.google.com/maps?&z=18&q=#{mark.latitude}+#{mark.longitude}&ll=#{mark.latitude}+#{mark.longitude}", target: :new %></td>
         <td><%= link_to 'Destroy', mark, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

@@ -29,7 +29,9 @@ class MarksController < ApplicationController
 
     geo_localization = "#{@mark.latitude},#{@mark.longitude}"
     query = Geocoder.search(geo_localization).first
-    @mark.address = query.address
+    if query.present?
+      @mark.address = query.address
+    end
 
     respond_to do |format|
       if @mark.save
