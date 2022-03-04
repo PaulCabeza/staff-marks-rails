@@ -1,31 +1,28 @@
-<div class="container">
 <br>
-  <p>
-  <strong>Mark type:</strong>
-  <%= @mark.mark_type.capitalize %>
-</p>
+<div class="jumbotron">
+  <h2 class="display-6  ">Time card record</h2>
+  <br>
+  <p class="lead">
+    <strong>Mark type:</strong>
+    <%= @mark.mark_type.capitalize %>
+  </p>
+  <p class="lead">    
+    <strong>Latitude:</strong>
+    <%= @mark.latitude %>
+  </p>
+  <p class="lead">    
+    <strong>Longitude:</strong>
+    <%= @mark.longitude %>
+  </p>
+  <p class="lead">    
+    <strong>Address:</strong>
+    <%= @mark.address %>
+  </p>
+  <p class="lead">    
+    <strong>Datetime:</strong>
+    <%= @mark.created_at.to_s(:long) %>
+  </p>
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @mark.latitude %>
-</p>
-
-<p>
-  <strong>Longitude:</strong>
-  <%= @mark.longitude %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @mark.address %>
-</p>
-
-<p>
-  <strong>Datetime:</strong>
-  <%= @mark.created_at.to_s(:short) %>
-</p>
-
-<%= link_to 'Edit', edit_mark_path(@mark) %> |
-<%= link_to 'Back', marks_path %>
-
+  <hr class="my-4">  
+  <%= link_to 'Back', marks_path, class: 'btn btn-primary btn-lg' %>
 </div>
