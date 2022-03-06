@@ -3,9 +3,19 @@
   <h2 class="display-6  ">Time card record</h2>
   <br>
   <p class="lead">
-    <strong>Mark type:</strong>
+    <strong>Type:</strong>
     <%= @mark.mark_type.capitalize %>
   </p>
+  <p class="lead">    
+    <strong>Datetime:</strong>
+    <%= @mark.created_at.to_s(:long) %>
+  </p>
+  
+  <p class="lead">    
+    <strong>Address:</strong>
+    <%= @mark.address %>
+  </p>
+  
   <p class="lead">    
     <strong>Latitude:</strong>
     <%= @mark.latitude %>
@@ -13,14 +23,6 @@
   <p class="lead">    
     <strong>Longitude:</strong>
     <%= @mark.longitude %>
-  </p>
-  <p class="lead">    
-    <strong>Address:</strong>
-    <%= @mark.address %>
-  </p>
-  <p class="lead">    
-    <strong>Datetime:</strong>
-    <%= @mark.created_at.to_s(:long) %>
   </p>
 
   <hr class="my-4">  
