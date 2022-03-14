@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_05_132121) do
+ActiveRecord::Schema.define(version: 2022_03_14_203929) do
 
   create_table "marks", force: :cascade do |t|
     t.string "mark_type"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2022_03_05_132121) do
     t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_marks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

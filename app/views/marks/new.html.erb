@@ -65,10 +65,10 @@
 <%= form_with(model: @mark) do |form| %>
   <% if @mark.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(mark.errors.count, "error") %> prohibited this mark from being saved:</h2>
+      <h2><%= pluralize(@mark.errors.count, "error") %> prohibited this mark from being saved:</h2>
 
       <ul>
-        <% mark.errors.each do |error| %>
+        <% @mark.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -85,6 +85,10 @@
 
   <div class="field">
     <%= form.text_field :longitude, id:'longitude', hidden: true %>
+  </div>
+
+  <div class="field">
+    <%= form.text_field :user_id, id:'user_id', value: current_user.id, hidden: true %>
   </div>
 
   <%# <div class="field">

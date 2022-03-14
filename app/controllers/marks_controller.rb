@@ -3,7 +3,7 @@ class MarksController < ApplicationController
 
   # GET /marks or /marks.json
   def index
-    @marks = Mark.all
+    @marks = Mark.where(user_id: current_user)
   end
 
   # GET /marks/1 or /marks/1.json
@@ -75,6 +75,6 @@ class MarksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def mark_params
-      params.require(:mark).permit(:mark_type, :latitude, :longitude, :address)
+      params.require(:mark).permit(:mark_type, :latitude, :longitude, :address, :user_id)
     end
 end
