@@ -1,0 +1,41 @@
+<%= content_for :head do %>
+    <script type="text/javascript">
+     function initGeolocation()
+     {
+        if( navigator.geolocation )
+        {
+           // Call getCurrentPosition with success and failure callbacks
+           navigator.geolocation.getCurrentPosition( success, fail );
+        }
+        else
+        {
+           alert("Sorry, your browser does not support geolocation services.");
+        }
+     }
+
+     function success(position)
+     {
+
+         document.getElementById('long').value = position.coords.longitude;
+         document.getElementById('lat').value = position.coords.latitude
+     }
+
+     function fail()
+     {
+        // Could not obtain location
+     }
+
+
+   </script>
+<% end %>
+
+<h1>First home page</h1>
+<p>Longitude: <%= @longitude %> </p>
+<p>Latitude: <%= @latitude %> </p>
+<p>Coordinates: <%= @coordinates %></p>
+<form NAME="rd" METHOD="POST" ACTION="index.html">
+  <INPUT TYPE="text" NAME="long" ID="long" VALUE="">
+  <INPUT TYPE="text" NAME="lat" ID="lat" VALUE="">
+</form>
+<p><a href="https://maps.google.com/?ll=document.getElementById('lat').value,document.getElementById('long').value">Link to the map</a> </p>
+<p><a href="https://maps.google.com/?ll=<%= @latitude %>,<%= @longitude %>">Link to the map using geocoder</a> </p>
