@@ -1,5 +1,6 @@
 class MarksController < ApplicationController
   before_action :set_mark, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /marks or /marks.json
   def index

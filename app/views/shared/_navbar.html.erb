@@ -4,14 +4,14 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav">      
+      <% if user_signed_in? %>
       <li class="nav-item">
         <%= link_to "New Card-entry", new_mark_path, class:'nav-link' %>
       </li>
       <li class="nav-item">
         <%= link_to "My Card-records", marks_path, class:'nav-link' %>
       </li>
-      <% if user_signed_in? %>
       <li class="nav-item">
         <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:'nav-link' %>
       </li>
