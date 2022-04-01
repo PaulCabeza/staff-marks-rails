@@ -4,7 +4,7 @@ class MarksController < ApplicationController
 
   # GET /marks or /marks.json
   def index
-    @marks = Mark.where(user_id: current_user)
+    @pagy, @marks = pagy(Mark.where(user_id: current_user).order(created_at: :desc))
   end
 
   # GET /marks/1 or /marks/1.json

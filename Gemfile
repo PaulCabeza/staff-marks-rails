@@ -24,6 +24,7 @@ gem 'geocoder'
 
 gem 'devise', '~> 4.8', '>= 4.8.1'
 
+gem 'pagy'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
