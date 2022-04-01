@@ -1,9 +1,14 @@
 <br>
-<div class="jumbotron">
-  <h2 class="display-6  ">Time card record</h2>
+<% if @mark.mark_type.capitalize == 'In' %>
+<div class="jumbotron" style='background-color:#a5cddf'>
+  <% else %>
+  <div class="jumbotron" style='background-color:#b6e3c0'>
+  <% end %>
+
+  <h2 class="display-6  ">Time card record for user: <%= current_user.full_name %></h2>
   <br>
   <p class="lead">
-    <strong>Type:</strong>
+    <strong>Type:</strong>    
     <%= @mark.mark_type.capitalize %>
   </p>
   <p class="lead">    
@@ -24,7 +29,11 @@
     <strong>Longitude:</strong>
     <%= @mark.longitude %>
   </p>
+  <p class="lead">    
+    <strong>Show:</strong>
+    <%= link_to 'Map', "http://maps.google.com/maps?&z=18&q=#{@mark.latitude}+#{@mark.longitude}&ll=#{@mark.latitude}+#{@mark.longitude}", target: :new %>
+  </p>
 
   <hr class="my-4">  
-  <%= link_to 'Back', marks_path, class: 'btn btn-primary btn-lg' %>
+  <%= link_to 'Back', marks_path, class: 'btn btn-info btn-lg' %>
 </div>

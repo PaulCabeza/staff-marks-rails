@@ -36,7 +36,7 @@ class MarksController < ApplicationController
 
     respond_to do |format|
       if @mark.save
-        format.html { redirect_to mark_url(@mark), notice: "Mark was successfully created." }
+        format.html { redirect_to mark_url(@mark), notice: "Card was successfully created." }
         format.json { render :show, status: :created, location: @mark }
       else
         format.html { render :new, status: :unprocessable_entity }

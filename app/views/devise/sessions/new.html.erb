@@ -1,26 +1,59 @@
-<h2>Log in</h2>
+<div class="container"></div>  
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-5">
+          <div class="wrap">
+            <div class="img" style="background-image: url(images/bg-1.jpg);"></div>
+            <div class="login-wrap p-4 p-md-5">
+              <div class="d-flex">
+                <div class="w-100">
+                  <h3 class="mb-4">Log In</h3>
+                </div>
+                
+              </div>
+              <form action="#" class="signin-form">
+                <div class="form-group mt-3">
+                  <label class="form-control-placeholder" for="email">Email</label>
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+                  <!-- <input type="text" class="form-control" required> -->                  
+                </div>
+                <div class="form-group">
+                  <label class="form-control-placeholder" for="password">Password</label>
+                  <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+                  <!-- <input id="password-field" type="password" class="form-control" required> -->                  
+                  <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                </div>
+                <div class="form-group">
+                  <%= f.submit "Log in", class: 'form-control btn btn-primary rounded submit px-3' %>
+                  <!-- <button type="submit" class="form-control btn btn-primary rounded submit px-3">Log In</button> -->
+                </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+                <div class="form-group d-md-flex">
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+                  <% if devise_mapping.rememberable? %>
+                  <div class="w-50 text-left">
+                    <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
+                    <input type="checkbox" checked>
+                    <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+                  <div class="w-50 text-md-right">
+                    <%= link_to "Forgot password", new_password_path(resource_name) %>
+                  </div>
+                </div>
 
-<%= render "devise/shared/links" %>
+              </form>
+              <p class="text-center">Not a member? <%= link_to "Sign up", new_registration_path(resource_name) %></p>
+                <!-- <a data-toggle="tab" href="#signup">Sign Up</a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+
+
+    
+

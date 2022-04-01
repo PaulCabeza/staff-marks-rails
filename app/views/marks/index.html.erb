@@ -5,10 +5,10 @@
   <table class="table table-striped">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Datetime</th>
+        <th scope="col">#</th>
+        <th>Datetime</th>
         <th>Type</th>
-        <th>Latitude</th>
-        <th>Longitude</th>
+        
         <th>Address</th>
 
         <th colspan="3"></th>
@@ -16,12 +16,17 @@
     </thead>
 
     <tbody>
-      <% @marks.each do |mark| %>
+      <% @marks.each_with_index do |mark, index| %>
       <tr>
+        <td><%= index+1 %></td>
         <td><%= mark.created_at.to_s(:short) %></td>
-        <td><%= mark.mark_type %></td>
-        <td><%= mark.latitude %></td>
-        <td><%= mark.longitude %></td>
+        <% if mark.mark_type == 'In' %>
+        <td><%= image_tag("up-blue-arrow.png", size: '16x16') %><%= mark.mark_type %></td>
+        <% else %>
+        <td><%= image_tag("up-green-arrow.png", size: '16x16') %><%= mark.mark_type %></td>
+        <% end %>
+        
+        
         <td><%= mark.address %></td>
         <td><%= link_to 'Show', mark %></td>
         <td><%= link_to 'Map', "http://maps.google.com/maps?&z=18&q=#{mark.latitude}+#{mark.longitude}&ll=#{mark.latitude}+#{mark.longitude}", target: :new %></td>
