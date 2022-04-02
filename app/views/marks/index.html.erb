@@ -1,5 +1,5 @@
 <br>
-<h1>My Time Card Records</h1>
+<h1>My Cards</h1>
 
 <div class="table-responsive">
   <table class="table table-striped">
@@ -16,7 +16,7 @@
     </thead>
 
     <tbody>
-      <% @marks.each_with_index do |mark, index| %>
+      <% @marks.each.with_index(@pagy.offset) do |mark, index| %>
       <tr>
         <td><%= index+1 %></td>
         <td><%= mark.created_at.to_s(:short) %></td>

@@ -1,0 +1,43 @@
+<br>
+<h1>Cards for employee: <%= @employee.full_name %></h1>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th>Datetime</th>
+        <th>Type</th>
+        
+        <th>Address</th>
+
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @cards.each.with_index do |card, index| %>
+      <tr>
+        <td><%= index+1 %></td>
+        <td><%= card.created_at.to_s(:short) %></td>
+        <% if card.mark_type == 'In' %>
+        <td><%= image_tag("up-blue-arrow.png", size: '16x16') %><%= card.mark_type %></td>
+        <% else %>
+        <td><%= image_tag("up-green-arrow.png", size: '16x16') %><%= card.mark_type %></td>
+        <% end %>
+        
+        
+        <td><%= card.address %></td>
+        <td><%= link_to 'Show', card %></td>
+        <td><%= link_to 'Map', "http://maps.google.com/maps?&z=18&q=#{card.latitude}+#{card.longitude}&ll=#{card.latitude}+#{card.longitude}", target: :new %></td>
+        <td><%= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%== pagy_bootstrap_nav(@pagy) %>
+
+<%= link_to "Back", :back %>
+<br>
+<%= link_to "Users", users_path %>
