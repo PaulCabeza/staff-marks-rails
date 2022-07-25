@@ -11,6 +11,10 @@
     <strong>Type:</strong>    
     <%= @mark.mark_type.capitalize %>
   </p>
+  <p class="lead">
+    <strong>Purchase Order:</strong>    
+    <%= @mark.purchaseorder %>
+  </p>
   <p class="lead">    
     <strong>Datetime:</strong>
     <%= @mark.created_at.to_s(:long) %>

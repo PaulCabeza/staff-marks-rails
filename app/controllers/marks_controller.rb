@@ -1,3 +1,9 @@
+require 'faraday'
+require 'faraday/net_http'
+require 'json'
+Faraday.default_adapter = :net_http
+
+
 class MarksController < ApplicationController
   before_action :set_mark, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
@@ -14,6 +20,8 @@ class MarksController < ApplicationController
   # GET /marks/new
   def new
     @mark = Mark.new
+    response = Faraday.get('https://orders-mgmt-app.herokuapp.com/pos_list')
+    @data = JSON.parse response.body
   end
 
   # GET /marks/1/edit
@@ -26,7 +34,7 @@ class MarksController < ApplicationController
     # @results = Geocoder.search("Paris")
     # @results.first.coordinates
 
-    @mark = Mark.new(mark_params)
+    @mark = Mark.new(mark_params)    
 
     geo_localization = "#{@mark.latitude},#{@mark.longitude}"
     query = Geocoder.search(geo_localization).first
@@ -76,6 +84,6 @@ class MarksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def mark_params
-      params.require(:mark).permit(:mark_type, :latitude, :longitude, :address, :user_id)
+      params.require(:mark).permit(:mark_type, :latitude, :longitude, :address, :user_id, :purchaseorder)
     end
 end

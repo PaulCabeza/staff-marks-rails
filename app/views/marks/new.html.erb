@@ -10,12 +10,12 @@
             //lat: -25.344, lng: 131.036
             lat: position.coords.latitude, lng: position.coords.longitude
           };
-            // The map, centered at Uluru
+            // The map centered 
           const map = new google.maps.Map(document.getElementById("map"), {
           zoom: 18,
           center: uluru,
           });
-          // The marker, positioned at Uluru
+          // The marker, positioned
           const marker = new google.maps.Marker({
           position: uluru,
           map: map,
@@ -60,8 +60,6 @@
   </body>
 </html>
 
-
-<%# <%= render 'form', mark: @mark %>
 <%= form_with(model: @mark) do |form| %>
   <% if @mark.errors.any? %>
     <div id="error_explanation">
@@ -78,8 +76,13 @@
 
   <div class="form-group">
     <label for="po">Purchase Order</label>
-    <input type="text" class="form-control" id="po" aria-describedby="pohelp">
-    <small id="pohelp" class="form-text text-muted">Enter the PO Number(This field is required).</small>
+    <select class="form-control" id="purchaseorder" required="">
+        <option value="">---</option>
+      <% @data.each do |purchase_order| %>
+        <option value=<%= purchase_order['po_number'] %> ><%= purchase_order['po_number'] %></option>
+      <% end %>
+    </select>  
+    <small id="pohelp" class="form-text text-muted">Select the PO Number(required).</small>
   </div>
 
   <div class="field">
@@ -98,28 +101,22 @@
     <%= form.text_field :user_id, id:'user_id', value: current_user.id, hidden: true %>
   </div>
 
-  <%# <div class="field">
-    <%= form.label :address %>
-    <%# <%= form.text_field :address %>
-  <%# </div> %>
-
   <div class="row m-1">
     <div class="actions m-1 btn-group btn-block">
       <%= form.button "Clock in", class:'btn btn-primary m-1', data: { confirm: "Are you sure?" }, onClick:"markEntry();" %>
       <%= form.button "Clock out", class:'btn btn-success m-1', data: { confirm: "Are you sure?" }, onClick:"markExit();" %>
     </div>
   </div>
-
+ 
 <% end %>
 
 <%= link_to 'My Cards', marks_path %>
 
 <script>
-  function markEntry(params) {    
+  function markEntry(params) {   
     document.getElementById('mark_type').value = "In"
   }
-  function markExit(params) {
+  function markExit(params) {      
     document.getElementById('mark_type').value = "Out"
-  }  
-
+  }
 </script>
