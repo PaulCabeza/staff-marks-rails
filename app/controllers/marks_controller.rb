@@ -57,7 +57,7 @@ class MarksController < ApplicationController
   def update
     respond_to do |format|
       if @mark.update(mark_params)
-        format.html { redirect_to mark_url(@mark), notice: "Mark was successfully updated." }
+        format.html { redirect_to mark_url(@mark), notice: "Card was successfully updated." }
         format.json { render :show, status: :ok, location: @mark }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -71,7 +71,7 @@ class MarksController < ApplicationController
     @mark.destroy
 
     respond_to do |format|
-      format.html { redirect_to marks_url, alert: "Mark was successfully destroyed." }
+      format.html { redirect_to marks_url, alert: "Card was successfully destroyed." }
       format.json { head :no_content }
     end
   end

@@ -76,7 +76,7 @@
 
   <div class="form-group">
     <label for="po">Purchase Order</label>
-    <select class="form-control" id="purchaseorder" required="">
+    <select class="form-control" id="purchaseorder" required="" name="mark[purchaseorder]">
         <option value="">---</option>
       <% @data.each do |purchase_order| %>
         <option value=<%= purchase_order['po_number'] %> ><%= purchase_order['po_number'] %></option>

@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+ Rails.application.routes.draw do
   # get 'users/index'
   devise_for :users, :controllers => { registrations: 'users/registrations'}
   resources :marks, only: [:index, :new, :create, :show, :destroy]
@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'users', to: "users#index"
   get 'users/:id', to: "users#show"
   get 'users/:id/cards', to: "users#cards", as: "users_cards"
+  get 'hours', to: "hours#index"
+  
   root to: "marks#index"
 
 
