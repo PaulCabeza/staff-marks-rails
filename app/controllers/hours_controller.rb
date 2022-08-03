@@ -1,5 +1,7 @@
 class HoursController < ApplicationController
     def index
-        @cards = Mark.all.order(created_at: :desc)
+        @q = Mark.ransack(params[:q])
+        @cards = @q.result(distinct: true)
+        # @cards = Mark.all.order(created_at: :desc)
     end
 end

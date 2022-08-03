@@ -1,4 +1,13 @@
 <br>
+<%= search_form_for @q, :url => hours_path do |f| %>
+
+  # Search if the name field contains...
+  <%= f.label :purchaseorder_cont %>
+  <%= f.search_field :purchaseorder_cont %>
+
+  <%= f.submit %>
+<% end %>
+
 <h1>Employee Cards</h1>
 
 <div class="table-responsive">
