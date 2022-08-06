@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2022_07_25_135342) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "marks", force: :cascade do |t|
     t.string "mark_type"
     t.float "latitude"
