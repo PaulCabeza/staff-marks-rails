@@ -6,11 +6,15 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
-        <th>Datetime</th>
-        <th>Type</th>
-        
-        <th>Address</th>
+        <th>Marks</th>        
         <th>Purchase Order</th>
+        <th>Datetime In</th>
+        <th>Address In</th>
+        <th>Map In</th>
+        <th>Datetime Out</th>
+        <th>Address Out</th>
+        <th>Map Out</th>
+        <th>Work Time</th>
 
         <th colspan="3"></th>
       </tr>
@@ -19,20 +23,41 @@
     <tbody>
       <% @marks.each.with_index(@pagy.offset) do |mark, index| %>
       <tr>
-        <td><%= index+1 %></td>
-        <td><%= mark.created_at.to_s(:short) %></td>
-        <% if mark.mark_type == 'In' %>
-        <td><%= image_tag("up-blue-arrow.png", size: '16x16') %><%= mark.mark_type %></td>
-        <% else %>
-        <td><%= image_tag("up-green-arrow.png", size: '16x16') %><%= mark.mark_type %></td>
+        <td><%= index+1 %></td>        
+
+        <td><%= image_tag("up-blue-arrow.png", size: '16x16') %>In
+        <% if mark.longitude_out? and mark.latitude_out?  %>
+        <%= image_tag("up-green-arrow.png", size: '16x16') %>Out
         <% end %>
+        </td>
         
-        
-        <td><%= mark.address %></td>
         <td><%= mark.purchaseorder %></td>
+        <td><%= mark.created_at.to_s(:short) %></td>
+        <td><%= mark.address_in %></td>
+        <td><%= link_to 'Map', "http://maps.google.com/maps?&z=18&q=#{mark.latitude_in}+#{mark.longitude_in}&ll=#{mark.latitude_in}+#{mark.longitude_in}", target: :new %></td>
+
+        <td>
+          <% if mark.datetime_out?  %>
+          <%= mark.datetime_out.to_s(:short) %>
+          <% end %>
+        </td>
+
+        <td><%= mark.address_out %></td>
+        <td><%= link_to 'Map', "http://maps.google.com/maps?&z=18&q=#{mark.latitude_out}+#{mark.longitude_out}&ll=#{mark.latitude_out}+#{mark.longitude_out}", target: :new %></td>
+        <td>
+          <% if mark.datetime_out?  %>
+            <%= Time.at((mark.datetime_out - mark.created_at).to_i.abs).utc.strftime "%H:%M" %>
+          <% end %>
+        </td>
+
         <td><%= link_to 'Show', mark %></td>
-        <td><%= link_to 'Map', "http://maps.google.com/maps?&z=18&q=#{mark.latitude}+#{mark.longitude}&ll=#{mark.latitude}+#{mark.longitude}", target: :new %></td>
+        
         <td><%= link_to 'Destroy', mark, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+        <% if mark.longitude_out.blank? and mark.latitude_out.blank?  %>
+        <%= link_to 'Mark Out', mark %>
+        <% end %>        
+        </td>
       </tr>
       <% end %>
     </tbody>

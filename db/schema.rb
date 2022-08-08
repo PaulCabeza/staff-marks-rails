@@ -10,20 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_06_040313) do
+ActiveRecord::Schema.define(version: 2022_08_07_152819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "marks", force: :cascade do |t|
     t.string "mark_type"
-    t.float "latitude"
-    t.float "longitude"
-    t.string "address"
+    t.float "latitude_in"
+    t.float "longitude_in"
+    t.string "address_in"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.string "purchaseorder"
+    t.float "latitude_out"
+    t.float "longitude_out"
+    t.float "address_out"
+    t.boolean "completed"
+    t.datetime "datetime_out"
     t.index ["user_id"], name: "index_marks_on_user_id"
   end
 
