@@ -8,7 +8,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">      
+    <ul class="navbar-nav mr-auto">      
 
       <li class="nav-item">        
         <%= link_to "Employees", users_path, class:'nav-link' %>
@@ -17,6 +17,7 @@
       <li class="nav-item">        
         <%= link_to "Hours", hours_path, class:'nav-link' %>
       </li>
+      </ul>
 
       <% else %>      
 
@@ -25,7 +26,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">      
+        <ul class="navbar-nav mr-auto">      
 
           <li class="nav-item">        
             <%= link_to "My Cards", marks_path, class:'nav-link' %>
@@ -33,12 +34,14 @@
           <li class="nav-item">        
             <%= link_to "New Card", new_mark_path, class:'nav-link' %>
           </li>
+          </ul>
 
-          <% end %>            
+          <% end %>
 
-
+          <ul class='navbar-nav pull-right'>
+          
           <li class="nav-item">
-            <%= link_to "Edit Profile", edit_user_registration_path, class:'nav-link' %>
+            <%= link_to current_user.full_name, edit_user_registration_path, class:'nav-link' %>
           </li>
           <li class="nav-item">
             <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:'nav-link' %>
@@ -46,6 +49,7 @@
           
           <% else %>
 
+          <ul class='navbar-nav pull-right'>
           <%= link_to "Time-card-app", marks_path, class:'navbar-brand' %>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

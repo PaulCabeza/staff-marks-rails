@@ -46,7 +46,7 @@
         <td><%= link_to 'Map', "http://maps.google.com/maps?&z=18&q=#{mark.latitude_out}+#{mark.longitude_out}&ll=#{mark.latitude_out}+#{mark.longitude_out}", target: :new %></td>
         <td>
           <% if mark.datetime_out?  %>
-            <%= Time.at((mark.datetime_out - mark.created_at).to_i.abs).utc.strftime "%H:%M" %>
+            <%= Time.at((mark.datetime_out - mark.created_at).to_i.abs).utc.strftime "%H:%M" %> hours
           <% end %>
         </td>
 
