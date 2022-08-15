@@ -1,13 +1,24 @@
 <br>
+<div class='form-group'>
 <%= search_form_for @q, :url => hours_path do |f| %>
-
-  # Search if the name field contains...
-  <%= f.label :purchaseorder_cont %>
-  <%= f.search_field :purchaseorder_cont %>
-
-  <%= f.submit %>
+  
+  <br>
+  Search by:<br>
+  <%= f.label :purchaseorder_cont, 'Purchase Order:' %>
+  <%= f.search_field :purchaseorder_cont , class: 'form-control' %>
+  <%= f.label :user_full_name_cont, 'Employee:' %>
+  <%= f.search_field :user_full_name_cont , class: 'form-control' %>
+  <div class= 'ml-1 form-check-input' > 
+    <%= f.check_box :datetime_out_not_null, {}, 1, nil %>
+    <%= f.label :datetime_out_not_null, 'Datetime out required', for: 'datetime-out-null', class: 'ml-1'  %>
+  </div>  
+  <br>
+  <br>
+  <%= f.submit class: "btn btn-primary", name: "" %>  
 <% end %>
-
+</div>
+<br>
+<br>
 <h1>Employee Cards</h1>
 
 <div class="table-responsive">
@@ -17,12 +28,10 @@
         <th scope="col">#</th>
         <th>Employee</th>
         <th>PO</th>        
-        <th>Datetime</th>
-        <th>Type</th>
-        
+        <th>Datetime In</th>
+        <th>Datetime Out</th>
+        <th>Total Time</th>
         <th>Address</th>
-        
-
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -34,16 +43,25 @@
         <td><%= card.user.full_name %></td>
         <td><%= card.purchaseorder %></td>
         <td><%= card.created_at.to_s(:db) %></td>
-        <% if card.mark_type == 'In' %>
-        <td><%= image_tag("up-blue-arrow.png", size: '16x16') %><%= card.mark_type %></td>
-        <% else %>
-        <td><%= image_tag("up-green-arrow.png", size: '16x16') %><%= card.mark_type %></td>
-        <% end %>        
+        <td>
+          <%if card.datetime_out? %>
+            <%= card.datetime_out.to_s(:db) %>
+          <% end %>
+        </td>
+        <td>
+          <% if card.datetime_out?  %>
+            <%= Time.at((card.datetime_out - card.created_at).to_i.abs).utc.strftime "%H:%M" %> hours
+            <% @hours_counter = Time.at(card.datetime_out - card.created_at).to_i %>            
+            <% @total_seconds = @total_seconds + @hours_counter %>         
+          <% end %>
+        </td>        
         
-        <td><%= card.address %></td>
+        <td>        
+          <%= card.address_in %>          
+        </td>
         
         <td><%= link_to 'Show', card %></td>
-        <td><%= link_to 'Map', "http://maps.google.com/maps?&z=18&q=#{card.latitude}+#{card.longitude}&ll=#{card.latitude}+#{card.longitude}", target: :new %></td>
+        <td><%= link_to 'Map', "http://maps.google.com/maps?&z=18&q=#{card.latitude_in}+#{card.longitude_in}&ll=#{card.latitude_in}+#{card.longitude_in}", target: :new %></td>
         <td><%= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
@@ -53,9 +71,17 @@
         <th>Total Hours</th>        
         <th></th>
         <th></th>
-        
+        <th>
+          <% seconds = @total_seconds % 60 %>
+          <% minutes = (@total_seconds / 60) % 60 %>
+          <% hours = @total_seconds / (60 * 60) %>
+          <%= format("%02d:%02d:%02d", hours, minutes, seconds) %>
+          <% Time.at(@total_seconds).utc.strftime "%H:%M"%>
+        </th>
+      
         <th></th>
         
+        <th></th>        
 
         <th colspan="3"></th>
       </tr>
@@ -64,5 +90,4 @@
 
   </table>
 </div>
-
 <br>

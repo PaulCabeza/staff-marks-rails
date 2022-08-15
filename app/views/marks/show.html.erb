@@ -7,37 +7,59 @@
 
   <h2 class="display-6  ">Time card record for user: <%= current_user.full_name %></h2>
   <br>
-  <p class="lead">
+  <%
+=begin%>
+ <p class="lead">
     <strong>Type:</strong>    
     <%= @mark.mark_type.capitalize %>
-  </p>
+  </p> 
+<%
+=end%>
   <p class="lead">
     <strong>Purchase Order:</strong>    
     <%= @mark.purchaseorder %>
   </p>
   <p class="lead">    
-    <strong>Datetime:</strong>
+    <strong>Start time:</strong>
     <%= @mark.created_at.to_s(:long) %>
-  </p>
+  </p>  
   
   <p class="lead">    
-    <strong>Address:</strong>
-    <%= @mark.address %>
+    <strong>Latitude In:</strong>
+    <%= @mark.latitude_in %>
   </p>
+  <p class="lead">    
+    <strong>Longitude In:</strong>
+    <%= @mark.longitude_in %>
+  </p>
+  <p class="lead">    
+    <strong>Address In:</strong>
+    <%= @mark.address_in %>
+  </p>
+  <p class="lead">    
+    <strong>End time:</strong>
+    <% if @mark.datetime_out? %>
+      <%= @mark.datetime_out.to_s(:long) %>
+    <% end %>
+  </p>  
   
   <p class="lead">    
-    <strong>Latitude:</strong>
-    <%= @mark.latitude %>
+    <strong>Latitude Out:</strong>
+    <%= @mark.latitude_out %>
   </p>
   <p class="lead">    
-    <strong>Longitude:</strong>
-    <%= @mark.longitude %>
+    <strong>Longitude Out:</strong>
+    <%= @mark.longitude_out %>
+  </p>
+  <p class="lead">    
+    <strong>Address Out:</strong>
+    <%= @mark.address_out %>
   </p>
   <p class="lead">    
     <strong>Show:</strong>
-    <%= link_to 'Map', "http://maps.google.com/maps?&z=18&q=#{@mark.latitude}+#{@mark.longitude}&ll=#{@mark.latitude}+#{@mark.longitude}", target: :new %>
+    <%= link_to 'Map', "http://maps.google.com/maps?&z=18&q=#{@mark.latitude_in}+#{@mark.longitude_in}&ll=#{@mark.latitude_in}+#{@mark.longitude_in}", target: :new %>
   </p>
 
   <hr class="my-4">  
-  <%= link_to 'Back', :back , class: 'btn btn-info btn-lg' %>
+  <%= link_to 'My Cards', marks_path , class: 'btn btn-info btn-lg' %>
 </div>

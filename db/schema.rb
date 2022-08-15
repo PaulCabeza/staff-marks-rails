@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2022_08_07_152819) do
     t.float "latitude_out"
     t.float "longitude_out"
     t.float "address_out"
-    t.boolean "completed"
+    t.boolean "completed", default: false
     t.datetime "datetime_out"
     t.index ["user_id"], name: "index_marks_on_user_id"
   end

@@ -7,6 +7,8 @@
   get 'users/:id', to: "users#show"
   get 'users/:id/cards', to: "users#cards", as: "users_cards"
   get 'hours', to: "hours#index"
+  get 'mark_out', to: "marks#new_out"
+  patch 'card/out/:id', to: "marks#card_out_add", as: "card_out_add"
   
   root to: "marks#index"
 

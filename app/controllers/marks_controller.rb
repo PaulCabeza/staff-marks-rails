@@ -24,6 +24,28 @@ class MarksController < ApplicationController
     @data = JSON.parse response.body
   end
 
+  # GET /marks/new
+  def new_out
+    @mark = Mark.find_by(id: params[:id])
+  end
+
+  def card_out_add
+    @mark = Mark.find_by(id: params[:id])
+    @mark.datetime_out = DateTime.now    
+    @mark.completed = true
+    respond_to do |format|
+      if @mark.update(mark_params)
+        format.html { redirect_to mark_url(@mark), notice: "Card was successfully updated." }
+        format.json { render :show, status: :ok, location: @mark }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @mark.errors, status: :unprocessable_entity }
+      end
+    end
+    
+
+  end
+
   # GET /marks/1/edit
   def edit
   end
@@ -36,10 +58,10 @@ class MarksController < ApplicationController
 
     @mark = Mark.new(mark_params)    
 
-    geo_localization = "#{@mark.latitude},#{@mark.longitude}"
+    geo_localization = "#{@mark.latitude_in},#{@mark.longitude_in}"
     query = Geocoder.search(geo_localization).first
     if query.present?
-      @mark.address = query.address
+      @mark.address_in = query.address
     end
 
     respond_to do |format|
@@ -84,6 +106,6 @@ class MarksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def mark_params
-      params.require(:mark).permit(:mark_type, :latitude, :longitude, :address, :user_id, :purchaseorder)
+      params.require(:mark).permit(:mark_type, :latitude_in, :longitude_in, :address_in, :user_id, :purchaseorder, :latitude_out, :longitude_out)
     end
 end

@@ -3,8 +3,8 @@
 
      function success(position)
      {
-         document.getElementById('longitude_in').value = position.coords.longitude;
-         document.getElementById('latitude_in').value = position.coords.latitude;
+         document.getElementById('longitude_out').value = position.coords.longitude;
+         document.getElementById('latitude_out').value = position.coords.latitude;
           const uluru =
           {
             //lat: -25.344, lng: 131.036
@@ -48,7 +48,17 @@
     </script>
 <% end %>
 <br>
-<h1>New Card</h1>
+<h1>Mark Out for Card</h1>
+
+<%= form_with(model: @mark, :url => card_out_add_path(id: @mark.id)) do |form| %>
+
+<div class="field">
+    Purchase Order: <%= form.label :purchaseorder, id: :purchaseorder, value: @mark.purchaseorder %>
+</div>
+
+<div class="field">
+    Start time: <%= form.label :purchaseorder, id: :purchaseorder, value: @mark.created_at.to_s(:long)  %>
+</div>
 
 <div id="map"></div>
 
@@ -60,8 +70,10 @@
   </body>
 </html>
 
-<%= form_with(model: @mark) do |form| %>
-  <% if @mark.errors.any? %>
+
+  <%
+=begin%>
+ <% if @mark.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@mark.errors.count, "error") %> prohibited this mark from being saved:</h2>
 
@@ -71,30 +83,18 @@
         <% end %>
       </ul>
     </div>
-  <% end %>
-  <br>
+  <% end %> 
+<%
+=end%>
+  <br>  
 
-  <div class="form-group">
-    <label for="po">Purchase Order</label>
-    <select class="form-control" id="purchaseorder" required="" name="mark[purchaseorder]">
-        <option value="">---</option>
-      <% @data.each do |purchase_order| %>
-        <option value=<%= purchase_order['po_number'] %> ><%= purchase_order['po_number'] %></option>
-      <% end %>
-    </select>  
-    <small id="pohelp" class="form-text text-muted">Select the PO Number(required).</small>
+  
+  <div class="field">
+    <%= form.text_field :latitude_out, id:'latitude_out', hidden: true %>
   </div>
 
   <div class="field">
-    <%= form.text_field :mark_type, id: :mark_type, hidden: true, value: 'In' %>
-  </div>
-
-  <div class="field">
-    <%= form.text_field :latitude_in, id:'latitude_in', hidden: true %>
-  </div>
-
-  <div class="field">
-    <%= form.text_field :longitude_in, id:'longitude_in', hidden: true %>
+    <%= form.text_field :longitude_out, id:'longitude_out', hidden: true %>
   </div>
 
   <div class="field">
@@ -103,24 +103,10 @@
 
   <div class="row m-1">
     <div class="actions m-1 btn-group btn-block">
-      <%= form.button "Clock in", class:'btn btn-primary m-1', data: { confirm: "Are you sure?" } %>
-      <%
-=begin%>
- <%= form.button "Clock out", class:'btn btn-success m-1', data: { confirm: "Are you sure?" }, onClick:"markExit();" %> 
-<%
-=end%>
+      <%= form.button "Clock out", class:'btn btn-success m-1', data: { confirm: "Are you sure?" } %>      
     </div>
   </div>
  
 <% end %>
 
 <%= link_to 'My Cards', marks_path %>
-
-<script>
-  function markEntry(params) {   
-    document.getElementById('mark_type').value = "In"
-  }
-  function markExit(params) {      
-    document.getElementById('mark_type').value = "Out"
-  }
-</script>
