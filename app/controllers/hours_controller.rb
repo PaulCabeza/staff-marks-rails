@@ -6,18 +6,12 @@ class HoursController < ApplicationController
         @hours_counter = DateTime.new
 
         @diferencia_de_horas = DateTime.now
-        @total_de_horas = DateTime.new
-
-        # @cards.each do |card|
-        #     if card.datetime_out?
-        #         @diferencia_de_horas = Time.at(card.datetime_out - card.created_at)
-        #         @total_de_horas = Time.at(@total_de_horas + @diferencia_de_horas)
-        #     end
-
-        # end
-
-
-        # @cards = @q.result(distinct: true)
-        # @cards = Mark.all.order(created_at: :desc)
+        @total_de_horas = DateTime.new        
     end
+
+    def search
+        index
+        render :index
+    end
+
 end

@@ -3,6 +3,12 @@
   devise_for :users, :controllers => { registrations: 'users/registrations'}
   resources :marks, only: [:index, :new, :create, :show, :destroy]
 
+  resources :hours do
+    collection do
+      match 'search' => 'hours#search', via: [:get, :post], as: :search
+    end
+  end
+
   get 'users', to: "users#index"
   get 'users/:id', to: "users#show"
   get 'users/:id/cards', to: "users#cards", as: "users_cards"
